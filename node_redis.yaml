@@ -1,0 +1,21 @@
+version: '1'
+
+services:
+
+  
+  redis:
+    image: redis    
+    volumes:
+      - /redis_data:/data
+    container_name: redis
+    restart: always
+
+  nodejs_api:
+    image: my_app:v1
+    ports:
+      - "3000:3000"
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    container_name: myapp
+    restart: always
